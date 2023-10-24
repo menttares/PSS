@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="task">
+        <img id="image" src="Без названия.jfif" width="200px">
+    </div>
+
+    <script>
+        const image = document.getElementById('image');
+
+        image.addEventListener('mouseover', function () {
+            image.style.width = '250px'; // Увеличение размера при наведении
+        });
+
+        image.addEventListener('mouseout', function () {
+            image.style.width = '200px'; // Возврат к первоначальному размеру при уходе
+        });
+    </script>
+
+    <div class="task">
+        <p id="text">Текст, который будет заменен</p>
+        <button onclick="replaceWithImage()">Заменить изображением</button>
+
+        <script>
+            function replaceWithImage() {
+                const textElement = document.getElementById('text');
+                textElement.innerHTML = '<img src="Без названия.jfif" alt="task2">';
+            }
+        </script>
+    </div>
+
+    <div class="task">
+        <img src="Без названия.jfif" class="draggable">
+        <p class="draggable">floppa!!!!</p>
+    </div>
+    <script>
+        // task 4
+        const elements = document.querySelectorAll('.draggable');
+        let offsetX, offsetY;
+        let isDragging = false;
+
+        elements.forEach(element => {
+            element.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.clientX - element.getBoundingClientRect().left;
+                offsetY = e.clientY - element.getBoundingClientRect().top;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    element.style.left = e.clientX - offsetX + 'px';
+                    element.style.top = e.clientY - offsetY + 'px';
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        });
+
+    </script>
+
+    <div id="container" style="position: relative; width: 300px; height: 200px; border: 1px solid #000;">
+        <img id="imageMove" src="Без названия.jfif"
+            style="position: absolute; width: 50px; top: 0; left: 0; transition: all 2s ease-in-out;">
+    </div>
+    <button id="moveButton">Начать движение</button>
+
+    <script>
+        const container = document.getElementById('container');
+        const imageMove = document.getElementById('imageMove');
+        const moveButton = document.getElementById('moveButton');
+        let isMoving = false;
+
+        moveButton.addEventListener('click', () => {
+            if (!isMoving) {
+                isMoving = true;
+                moveImage();
+            } else {
+                isMoving = false;
+                resetImage();
+            }
+        });
+
+        function moveImage() {
+            setTimeout(() => {
+                imageMove.style.left = '250px';
+                imageMove.style.top = '150px';
+            }, 10);
+
+            setTimeout(() => {
+                resetImage();
+            }, 2000);
+        }
+
+        function resetImage() {
+            imageMove.style.left = '0px';
+            imageMove.style.top = '0px';
+        }
+    </script>
+
+
+
+
+    <style>
+        .draggable {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .task {
+            border: 1px solid red;
+            padding: 25px;
+            margin-bottom: 10px;
+        }
+
+        #container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        #image5 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+
+</body>
+
+</html>

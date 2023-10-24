@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #animated-object {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="animated-object"></div>
+    <script>
+        // JSON объект с начальными координатами
+        const animationData = {
+            x: 0,
+            y: 0,
+        };
+
+        const animatedObject = document.getElementById("animated-object");
+
+        function animateObject() {
+            animatedObject.style.left = animationData.x + "px";
+            animatedObject.style.top = animationData.y + "px";
+
+            // Изменяем координаты для следующего шага анимации
+            animationData.x += 5;
+            animationData.y += 5;
+
+            // Повторяем анимацию
+            requestAnimationFrame(animateObject);
+        }
+
+        // Запускаем анимацию
+        animateObject();
+
+
+    </script>
+</body>
+
+</html>
